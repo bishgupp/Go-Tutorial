@@ -7,8 +7,8 @@ import (
 )
 
 func main() {
-    http.HandleFunc("/", hello)
-    
+    http.HandleFunc("/hello", hello)
+
     http.HandleFunc("/weather/",  func(w http.ResponseWriter, r *http.Request) {
         city := strings.SplitN(r.URL.Path, "/", 3)[2]
 
@@ -21,7 +21,7 @@ func main() {
         w.Header().Set("Content-Type", "application/json; charset=utf-8")
         json.NewEncoder(w).Encode(data)
     })
- 
+
     http.ListenAndServe(":8080", nil)
 }
 
